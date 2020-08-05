@@ -1,8 +1,11 @@
 import { object, string } from 'yup';
+import monk from 'monk';
 
-const schema = object().shape({
+export const schema = object().shape({
   slug: string().trim().matches(/\w\-/i),
   url: string().trim().url().required(),
 });
 
-export default schema;
+export const db = monk('localhost:27017/shortener');
+export const urls = db.get('urls');
+urls.createIndex('name');
