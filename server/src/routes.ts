@@ -24,6 +24,15 @@ router.post('/url', async (req, res, next) => {
   }
 });
 
-router.get('/:id', (req, res) => res.json());
+router.get('/:slug', async (req, res, next) => {
+  const { slug } = req.params;
+
+  try {
+    const result = await urls.findOne({ slug });
+    res.redirect(result?.url ?? '/');
+  } catch (e) {
+    next(e);
+  }
+});
 
 export default router;
