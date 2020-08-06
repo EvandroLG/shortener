@@ -9,3 +9,4 @@ export const schema = object().shape({
 export const db = monk('localhost:27017/shortener');
 export const urls = db.get('urls');
 urls.createIndex('name');
+urls.createIndex('slug', { unique: true });
