@@ -1,5 +1,4 @@
 import express, { NextFunction, Request, Response } from 'express';
-import monk from 'monk';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -18,8 +17,7 @@ app.use(
   (
     error: Error & { status: number; message: string },
     req: Request,
-    res: Response,
-    next: NextFunction
+    res: Response
   ) => {
     res.status(error.status ?? 500).json({
       message: error.message,
