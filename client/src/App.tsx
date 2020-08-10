@@ -14,7 +14,7 @@ function App() {
         <h1 className="App-header__title">Shortener</h1>
       </header>
       <main>
-        <form className="App-form">
+        <form className="App-form" action="/url/">
           <input
             className="App-form__input"
             type="input"

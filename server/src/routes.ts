@@ -1,10 +1,13 @@
+import path from 'path';
 import { Router } from 'express';
 import { schema, urls } from './schemas';
 import { nanoid } from 'nanoid';
 
 const router = Router();
 
-router.get('/', (req, res) => res.send('root'));
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
 
 router.post('/url', async (req, res, next) => {
   const { slug, url } = req.body;

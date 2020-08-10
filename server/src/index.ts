@@ -1,3 +1,4 @@
+import path from 'path';
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -11,6 +12,7 @@ app.use(helmet());
 app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../../client/build/')));
 app.use(routes);
 
 app.use(
