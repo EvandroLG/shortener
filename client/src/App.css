@@ -1,0 +1,53 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-color: #EF5258;
+}
+
+.App {
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.App-header {
+  text-align: center;
+}
+
+.App-header__title {
+  text-transform: lowercase;
+  font-size: 4.5rem;
+  color: var(--main-color);
+  margin-bottom: 3rem;
+}
+
+.App-form {
+  display: grid;
+  grid-template-columns: 80% 17%;
+  grid-gap: 3%;
+  grid-template-rows: 4rem;
+}
+
+.App-form__input {
+  font-size: 2.5rem;
+  padding: 0 1rem;
+}
+
+.App-form__button {
+  cursor: pointer;
+  text-transform: lowercase;
+  background: var(--main-color);
+  color: #FFF;
+  border: 0;
+  font-size: 2.5rem;
+}
