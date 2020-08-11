@@ -20,8 +20,9 @@ router.post('/url', async (req, res, next) => {
 
     const _slug = (slug ?? nanoid(5)).toLowerCase();
     const created = await urls.insert({ url, slug: _slug });
+    const { _id, ...result } = created;
 
-    res.json(created);
+    res.json(result);
   } catch (e) {
     next(e);
   }
