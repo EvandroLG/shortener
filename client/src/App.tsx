@@ -1,20 +1,21 @@
-import React, { useRef, useEffect, FormEvent } from 'react';
+import React, { useRef, useEffect, FormEvent, useState } from 'react';
 import { postData } from './utils';
 import './App.css';
 
 function App() {
   const input = useRef<HTMLInputElement>(null);
+  const [data, setData] = useState(null);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     const url = input.current?.value;
 
-    if (!url) {
-      return;
+    if (url) {
+      postData('/url', { url }).then((res) => {
+        setData(res);
+      });
     }
-
-    postData('/url', { url }).then(console.log);
   }
 
   useEffect(() => {
@@ -38,6 +39,7 @@ function App() {
             Shorten!
           </button>
         </form>
+        {data && <div>{JSON.stringify(data)}</div>}
       </main>
     </div>
   );
