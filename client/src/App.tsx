@@ -1,12 +1,26 @@
-import React, { useRef, useEffect, FormEvent, useState } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  FormEvent,
+  ChangeEvent,
+} from 'react';
 import { postData } from './utils';
 import './App.css';
 
 function App() {
   const input = useRef<HTMLInputElement>(null);
   const [data, setData] = useState(null);
+  const [value, setValue] = useState('');
 
-  function handleSubmit(e: FormEvent) {
+  const isDisabled = useCallback(() => value.length < 3, [value]);
+
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  const handleSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
 
     const url = input.current?.value;
@@ -16,7 +30,7 @@ function App() {
         setData(res);
       });
     }
-  }
+  }, []);
 
   useEffect(() => {
     input?.current?.focus();
@@ -34,8 +48,13 @@ function App() {
             type="url"
             placeholder="Shorten your link"
             ref={input}
+            onChange={handleChange}
           />
-          <button className="App-form__button" type="submit">
+          <button
+            className="App-form__button"
+            type="submit"
+            disabled={isDisabled()}
+          >
             Shorten!
           </button>
         </form>
