@@ -6,31 +6,34 @@ import React, {
   FormEvent,
   ChangeEvent,
 } from 'react';
+
+import Result from './Result';
 import { postData } from './utils';
 import './App.css';
 
 function App() {
   const input = useRef<HTMLInputElement>(null);
-  const [data, setData] = useState(null);
-  const [value, setValue] = useState('');
+  const [data, setData] = useState<{ url: string; slug: string } | null>(null);
+  const [url, setValue] = useState('');
 
-  const isDisabled = useCallback(() => value.length < 3, [value]);
+  const isDisabled = useCallback(() => url.length < 3, [url]);
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   }, []);
 
-  const handleSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
 
-    const url = input.current?.value;
-
-    if (url) {
-      postData('/url', { url }).then((res) => {
-        setData(res);
-      });
-    }
-  }, []);
+      if (url) {
+        postData('/url', { url }).then((res) => {
+          setData(res);
+        });
+      }
+    },
+    [url]
+  );
 
   useEffect(() => {
     input?.current?.focus();
@@ -45,7 +48,8 @@ function App() {
         <form className="App-form" onSubmit={handleSubmit} action="/url">
           <input
             className="App-form__input"
-            type="url"
+            autoComplete="off"
+            type="text"
             placeholder="Shorten your link"
             ref={input}
             onChange={handleChange}
@@ -58,7 +62,7 @@ function App() {
             Shorten!
           </button>
         </form>
-        {data && <div>{JSON.stringify(data)}</div>}
+        {data && <Result {...data} />}
       </main>
     </div>
   );

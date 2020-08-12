@@ -1,10 +1,15 @@
-/* latin */
 @font-face {
   font-family: 'Yanone Kaffeesatz';
   font-style: normal;
   font-weight: 400;
   font-display: fallback;
   src: url(https://fonts.gstatic.com/s/yanonekaffeesatz/v15/3y9I6aknfjLm_3lMKjiMgmUUYBs04aUXNxt9gW2LIfto9tWZd2GMKHD0VTtI.woff) format('woff');
+}
+
+:root {
+  --main-color: #EF5258;
+  --second-color: #212121;
+  --border-radius: 6px;
 }
 
 html {
@@ -15,10 +20,6 @@ html {
 h1 {
   margin: 0;
   padding: 0;
-}
-
-:root {
-  --main-color: #EF5258;
 }
 
 .App {
@@ -51,10 +52,10 @@ h1 {
 .App-form__input {
   outline: none;
   font-size: 2.5rem;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   padding: 0 1rem;
-  border: 1px solid #212121;
-  color: #212121;
+  border: 1px solid var(--second-color);
+  color: var(--second-color);
 }
 
 .App-form__input:focus {
@@ -68,7 +69,7 @@ h1 {
   color: #FFF;
   border: 0;
   font-size: 2.5rem;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
 }
 
 .App-form__button:disabled {
