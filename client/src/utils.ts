@@ -9,3 +9,7 @@ export async function postData(url: string, data: { [key: string]: any }) {
 
   return response.json();
 }
+
+export function normalizeUrl(url: string) {
+  return /^https?:\/\//.test(url) ? url : `https://${url}`;
+}

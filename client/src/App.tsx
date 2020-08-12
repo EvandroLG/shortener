@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 
 import Result from './Result';
-import { postData } from './utils';
+import { postData, normalizeUrl } from './utils';
 import './App.css';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
       e.preventDefault();
 
       if (url) {
-        postData('/url', { url }).then((res) => {
+        postData('/url', { url: normalizeUrl(url) }).then((res) => {
           setData(res);
         });
       }
