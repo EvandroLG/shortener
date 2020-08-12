@@ -1,3 +1,12 @@
+/* latin */
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  src: url(https://fonts.gstatic.com/s/yanonekaffeesatz/v15/3y9I6aknfjLm_3lMKjiMgmUUYBs04aUXNxt9gW2LIfto9tWZd2GMKHD0VTtI.woff) format('woff');
+}
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -26,6 +35,7 @@ h1 {
 
 .App-header__title {
   text-transform: lowercase;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
   font-size: 4.5rem;
   color: var(--main-color);
   margin-bottom: 3rem;
@@ -39,9 +49,16 @@ h1 {
 }
 
 .App-form__input {
+  outline: none;
   font-size: 2.5rem;
   border-radius: 6px;
   padding: 0 1rem;
+  border: 1px solid #212121;
+  color: #212121;
+}
+
+.App-form__input:focus {
+  border-color: var(--main-color);
 }
 
 .App-form__button {
