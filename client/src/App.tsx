@@ -35,11 +35,19 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="App-header__title">Shortener</h1>
+        <h1 className="App-header__title" data-testid="title">
+          Shortener
+        </h1>
       </header>
       <main>
-        <form className="App-form" onSubmit={handleSubmit} action="/url">
+        <form
+          data-testid="form"
+          className="App-form"
+          onSubmit={handleSubmit}
+          action="/url"
+        >
           <input
+            data-testid="input"
             className="App-form__input"
             autoComplete="off"
             type="text"
@@ -47,6 +55,7 @@ function App() {
             ref={input}
           />
           <button
+            data-testid="button-submit"
             className="App-form__button"
             type="submit"
             disabled={isDisabled()}
