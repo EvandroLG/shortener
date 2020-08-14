@@ -1,8 +1,0 @@
-.Result {
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid var(--second-color);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  margin-top: 1rem;
-}

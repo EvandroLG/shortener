@@ -1,39 +1,32 @@
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useCallback,
-  FormEvent,
-  ChangeEvent,
-} from 'react';
+import React, { useRef, useEffect, useCallback, FormEvent } from 'react';
 
-import Result from './Result';
 import { postData, normalizeUrl } from './utils';
 import './App.css';
 
 function App() {
   const input = useRef<HTMLInputElement>(null);
-  const [data, setData] = useState<{ url: string; slug: string } | null>(null);
-  const [url, setValue] = useState('');
 
-  const isDisabled = useCallback(() => url.length < 3, [url]);
-
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+  const isDisabled = useCallback(() => {
+    if (input.current) {
+      return input.current.value.length < 3;
+    }
   }, []);
 
-  const handleSubmit = useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
+  const handleSubmit = useCallback((e: FormEvent) => {
+    e.preventDefault();
 
-      if (url) {
-        postData('/url', { url: normalizeUrl(url) }).then((res) => {
-          setData(res);
-        });
-      }
-    },
-    [url]
-  );
+    if (input.current) {
+      postData('/url', { url: normalizeUrl(input.current.value) }).then(
+        (res) => {
+          if (input.current) {
+            input.current.value = `${window.location.protocol}//${window.location.host}/${res.slug}`;
+            input.current.select();
+            document.execCommand('copy');
+          }
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     input?.current?.focus();
@@ -52,7 +45,6 @@ function App() {
             type="text"
             placeholder="Shorten your link"
             ref={input}
-            onChange={handleChange}
           />
           <button
             className="App-form__button"
@@ -62,7 +54,6 @@ function App() {
             Shorten!
           </button>
         </form>
-        {data && <Result {...data} />}
       </main>
     </div>
   );
