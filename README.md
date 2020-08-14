@@ -1,5 +1,5 @@
 # shortener
-Just another URL shortener project :see_no_evil:
+Just another URL shortener project :see_no_evil:<br>
 Stack: TypeScript, React, Node.js, express and mongoDB.
 
 [![Build
